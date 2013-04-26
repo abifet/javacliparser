@@ -10,7 +10,7 @@
 
     <groupId>net.samoa-project</groupId>
     <artifactId>samoa-options</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <name>SAMOA CLI Options</name>
