@@ -10,7 +10,7 @@
 
     <groupId>net.samoa-project</groupId>
     <artifactId>samoa-options</artifactId>
-    <version>0.1</version>
+    <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>SAMOA CLI Options</name>
@@ -28,7 +28,7 @@
 
     <scm>
       <connection>scm:git:https://gdfm@github.com/samoa-options.git</connection>
-      <developerConnection>scm:git:https://gdfm@github.com/samoa-options.git</developerConnection>
+      <developerConnection>scm:git:git@github.com:gdfm/samoa-options.git</developerConnection>
     </scm>
 
     <properties>
