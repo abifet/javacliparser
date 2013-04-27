@@ -37,9 +37,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:https://gdfm@github.com/samoa-options.git</connection>
-        <developerConnection>scm:git:git@github.com:gdfm/samoa-options.git</developerConnection>
-        <url>git@github.com:gdfm/samoa-options.git</url>
+        <connection>scm:git:git@github.com:abifet/javacliparser.git</connection>
+        <developerConnection>scm:git:git@github.com:abifet/javacliparser.git</developerConnection>
+        <url>git@github.com:abifet/javacliparser.git</url>
     </scm>
 
     <parent>
