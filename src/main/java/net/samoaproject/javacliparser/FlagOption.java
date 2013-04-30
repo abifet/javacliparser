@@ -15,7 +15,7 @@
  * License.  
  */
 
-package net.samoaproject.options;
+package net.samoaproject.javacliparser;
 
 /**
  * Flag option.

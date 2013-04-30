@@ -19,11 +19,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.samoa-project</groupId>
-    <artifactId>samoa-options</artifactId>
+    <artifactId>javacliparser</artifactId>
     <version>0.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>SAMOA CLI Options</name>
+    <name>SAMOA Java CLI Parser</name>
     <url>http://samoa-project.net</url>
     <description>Command line parsing library for SAMOA</description>
 
@@ -42,6 +42,25 @@
         <url>git@github.com:abifet/javacliparser.git</url>
     </scm>
 
+    <developers>
+        <developer>
+            <id>abifet</id>
+            <name>Albert Bifet</name>
+            <email>abifet@yahoo-inc.com</email>
+            <timezone>+1</timezone>
+            <organization>Yahoo! Research</organization>
+            <organizationUrl>http://labs.yahoo.com</organizationUrl>
+        </developer>
+        <developer>
+            <id>gdfm</id>
+            <name>Gianmarco De Francisci Morales</name>
+            <email>gdfm@apache.org</email>
+            <timezone>+1</timezone>
+            <organization>Yahoo! Research</organization>
+            <organizationUrl>http://labs.yahoo.com</organizationUrl>
+        </developer>
+    </developers>
+    
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>

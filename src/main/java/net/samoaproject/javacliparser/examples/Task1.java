@@ -15,18 +15,23 @@
  * License.  
  */
 
-package net.samoaproject.options.examples;
+package net.samoaproject.javacliparser.examples;
 
-import net.samoaproject.options.Configurable;
-import net.samoaproject.options.IntOption;
+import net.samoaproject.javacliparser.ClassOption;
+import net.samoaproject.javacliparser.Configurable;
+import net.samoaproject.javacliparser.IntOption;
 
-public class Task2 implements Configurable { 
+public class Task1 implements Configurable {
 
     public IntOption ensembleSizeOption = new IntOption("ensembleSize", 's',
             "The number of models in the bag.", 10, 1, Integer.MAX_VALUE);
+    
+    public ClassOption taskClassOption = new ClassOption("taskClass", 'l',
+            "Task to execute.", Task2.class, "Task2 -s 100");
 
     public void init() {
-        System.out.println("Task2:" + this.ensembleSizeOption.getValue());
-
+        System.out.println("Task1:" + this.ensembleSizeOption.getValue());
+        Task2 task = this.taskClassOption.getValue();
+        task.init();
     }
 }

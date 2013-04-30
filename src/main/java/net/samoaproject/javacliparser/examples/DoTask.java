@@ -15,12 +15,12 @@
  * License.  
  */
 
-package net.samoaproject.options.examples;
+package net.samoaproject.javacliparser.examples;
 
 
-import net.samoaproject.options.ClassOption;
-import net.samoaproject.options.Configurable;
-import net.samoaproject.options.IntOption;
+import net.samoaproject.javacliparser.ClassOption;
+import net.samoaproject.javacliparser.Configurable;
+import net.samoaproject.javacliparser.IntOption;
 
 
 public class DoTask implements Configurable { 

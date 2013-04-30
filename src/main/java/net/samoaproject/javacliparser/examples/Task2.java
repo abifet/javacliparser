@@ -15,16 +15,18 @@
  * License.  
  */
 
-package net.samoaproject.options;
+package net.samoaproject.javacliparser.examples;
 
-import java.io.Serializable;
+import net.samoaproject.javacliparser.Configurable;
+import net.samoaproject.javacliparser.IntOption;
 
-/** 
- * Configurable Interface.
- *
- * @author Richard Kirkby (rkirkby@cs.waikato.ac.nz)
- * @version $Revision: 7 $
- */
-public interface Configurable extends Serializable {
+public class Task2 implements Configurable { 
 
+    public IntOption ensembleSizeOption = new IntOption("ensembleSize", 's',
+            "The number of models in the bag.", 10, 1, Integer.MAX_VALUE);
+
+    public void init() {
+        System.out.println("Task2:" + this.ensembleSizeOption.getValue());
+
+    }
 }
