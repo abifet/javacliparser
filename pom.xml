@@ -59,6 +59,14 @@
             <organization>Yahoo! Research</organization>
             <organizationUrl>http://labs.yahoo.com</organizationUrl>
         </developer>
+        <developer>
+            <id>rkirkby</id>
+            <name>Richard Kirkby</name>
+            <email>rkirkby@cs.waikato.ac.nz</email>
+            <timezone>+12</timezone>
+            <organization>University of Waikato</organization>
+            <organizationUrl>http://www.waikato.ac.nz</organizationUrl>
+        </developer>
     </developers>
     
     <parent>
