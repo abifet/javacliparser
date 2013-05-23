@@ -1,14 +1,13 @@
 javacliparser
 =============
 
-JAVA Command Line Interface Parser able to use subcommands (more than one level depth).
+Java Command Line Interface Parser is a library to parse command line options that is able to use nested options.
 
-It allows to enter commands with subcommands defining a command line tree, for example:
+It allows to enter options with suboptions that define a command line tree, for example:
 
 `` DoTask -s 5 -l (Task1 -s 3 -l (Task2 -s 1)) ``
 
 The code to implement this, is the following:
-
 
 ```java
 public class DoTask implements Configurable {
@@ -24,7 +23,6 @@ public class DoTask implements Configurable {
    }
     public static void main(String[] args) throws Exception {
         DoTask main = ClassOption.createObject(args, DoTask.class);
-        //DoTask main = ClassOption.createObject("DoTask -s 5 -l (Task1 -s 3 -l (Task2 -s 1))", DoTask.class);
         main.init();
     }   
 }
@@ -52,14 +50,15 @@ public class Task2 implements Configurable {
 }
 
 ```
-To use the library, it is as easy as:
+
+Using the library is as easy as this:
 
    1. Create a class that implements Configurable
    2. Add option objects as fields inside the class
-   3. To retrieve the value of the options usue the option method ``getValue()``
+   3. To retrieve the value of the options use the option method ``getValue()``
    4. To create a new object use ``ClassOption.createObject()``
 
-There are the following types of options:
+The following types of options are supported:
 
    * Integer: ``IntOption (name, char, purpose, default Value, min Value, max Value)``
    * Float: ``FloatOption (name, char, purpose, default Value, min Value, max Value)``
@@ -104,4 +103,3 @@ public class Task implements Configurable {
 ```
 
 This library is used in the SAMOA and MOA projects for mining big data streams.
-
