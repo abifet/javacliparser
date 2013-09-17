@@ -15,7 +15,7 @@
  * License.  
  */
 
-package net.samoaproject.javacliparser;
+package net.javacliparser;
 
 /**
  * List option.
