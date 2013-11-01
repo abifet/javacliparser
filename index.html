@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Javacliparser by abifet</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Javacliparser</h1>
+          <h2>JAVA Command Line Interface Parser able to use subcommands (more than one level depth).</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/abifet/javacliparser/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/abifet/javacliparser/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/abifet/javacliparser" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <p>Java Command Line Interface Parser is a library to parse command line options that is able to use nested options.</p>
+
+<p>It allows to enter options with suboptions that define a command line tree, for example:</p>
+
+<p><code>DoTask -s 5 -l (Task1 -s 3 -l (Task2 -s 1))</code></p>
+
+<p>The code to implement this, is the following:</p>
+
+<div class="highlight highlight-java"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DoTask</span> <span class="kd">implements</span> <span class="n">Configurable</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="n">IntOption</span> <span class="n">sizeOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntOption</span><span class="o">(</span><span class="s">"size"</span><span class="o">,</span> <span class="sc">'s'</span><span class="o">,</span>
+            <span class="s">"Size"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+
+   <span class="kd">public</span> <span class="n">ClassOption</span> <span class="n">taskClassOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassOption</span><span class="o">(</span><span class="s">"taskClass"</span><span class="o">,</span> <span class="sc">'l'</span><span class="o">,</span>
+            <span class="s">"Task to execute."</span><span class="o">,</span> <span class="n">Task1</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">"Task1 -s 4"</span><span class="o">);</span>
+
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Task1</span> <span class="n">task</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">taskClassOption</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+        <span class="n">task</span><span class="o">.</span><span class="na">init</span><span class="o">()</span>
+   <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">DoTask</span> <span class="n">main</span> <span class="o">=</span> <span class="n">ClassOption</span><span class="o">.</span><span class="na">createObject</span><span class="o">(</span><span class="n">args</span><span class="o">,</span> <span class="n">DoTask</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">main</span><span class="o">.</span><span class="na">init</span><span class="o">();</span>
+    <span class="o">}</span>   
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Task1</span> <span class="kd">implements</span> <span class="n">Configurable</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="n">IntOption</span> <span class="n">sizeOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntOption</span><span class="o">(</span><span class="s">"size"</span><span class="o">,</span> <span class="sc">'s'</span><span class="o">,</span>
+            <span class="s">"Size"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="n">ClassOption</span> <span class="n">taskClassOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassOption</span><span class="o">(</span><span class="s">"taskClass"</span><span class="o">,</span> <span class="sc">'l'</span><span class="o">,</span>
+            <span class="s">"Task to execute."</span><span class="o">,</span> <span class="n">Task2</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">"Task2 -s 100"</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Task2</span> <span class="n">task</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">taskClassOption</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+        <span class="n">task</span><span class="o">.</span><span class="na">init</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Task2</span> <span class="kd">implements</span> <span class="n">Configurable</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">IntOption</span> <span class="n">sizeOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntOption</span><span class="o">(</span><span class="s">"size"</span><span class="o">,</span> <span class="sc">'s'</span><span class="o">,</span>
+            <span class="s">"Size"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">//...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</pre></div>
+
+<p>Using the library is as easy as this:</p>
+
+<ol>
+<li>Create a class that implements Configurable</li>
+<li>Add option objects as fields inside the class</li>
+<li>To retrieve the value of the options use the option method <code>getValue()</code>
+</li>
+<li>To create a new object use <code>ClassOption.createObject()</code>
+</li>
+</ol><p>The following types of options are supported:</p>
+
+<ul>
+<li>Integer: <code>IntOption (name, char, purpose, default Value, min Value, max Value)</code>
+</li>
+<li>Float: <code>FloatOption (name, char, purpose, default Value, min Value, max Value)</code>
+</li>
+<li>Flag: <code>FlagOption (name, char, purpose)</code>
+</li>
+<li>File: <code>FileOption (name, char, purpose, default File name, default File extension, Output)</code> </li>
+<li>String: <code>StringOption (name, char, purpose, default Value)</code>
+</li>
+<li>Multichoice: <code>MultichoiceOption (name, char, purpose, option labels, option descriptions, default option index)</code>
+</li>
+<li>Class: <code>ClassOption (name, char, purpose, required type, default CLI string, null String)</code> </li>
+<li>List: <code>ListOption (name, char, purpose, expected option type, default list, separator char)</code> </li>
+</ul><p>Example of usage:</p>
+
+<div class="highlight highlight-java"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Task</span> <span class="kd">implements</span> <span class="n">Configurable</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">IntOption</span> <span class="n">gracePeriodOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntOption</span><span class="o">(</span>
+            <span class="s">"gracePeriod"</span><span class="o">,</span>
+            <span class="sc">'g'</span><span class="o">,</span>
+            <span class="s">"The number of instances a leaf should observe between split attempts."</span><span class="o">,</span>
+            <span class="mi">200</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="n">ClassOption</span> <span class="n">splitCriterionOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassOption</span><span class="o">(</span><span class="s">"splitCriterion"</span><span class="o">,</span>
+            <span class="sc">'s'</span><span class="o">,</span> <span class="s">"Split criterion to use."</span><span class="o">,</span> <span class="n">SplitCriterion</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+            <span class="s">"InfoGainSplitCriterion"</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="n">FloatOption</span> <span class="n">splitConfidenceOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FloatOption</span><span class="o">(</span>
+            <span class="s">"splitConfidence"</span><span class="o">,</span>
+            <span class="sc">'c'</span><span class="o">,</span>
+            <span class="s">"The allowable error in split decision, values closer to 0 will take longer to decide."</span><span class="o">,</span>
+            <span class="mf">0.0000001</span><span class="o">,</span> <span class="mf">0.0</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="n">FlagOption</span> <span class="n">binarySplitsOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FlagOption</span><span class="o">(</span><span class="s">"binarySplits"</span><span class="o">,</span> <span class="sc">'b'</span><span class="o">,</span>
+            <span class="s">"Only allow binary splits."</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="n">FileOption</span> <span class="n">dumpFileOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOption</span><span class="o">(</span><span class="s">"dumpFile"</span><span class="o">,</span> <span class="sc">'d'</span><span class="o">,</span>
+            <span class="s">"File to append intermediate csv results to."</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">"csv"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="n">StringOption</span> <span class="n">xTitleOption</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringOption</span><span class="o">(</span><span class="s">"xTitle"</span><span class="o">,</span> <span class="sc">'m'</span><span class="o">,</span>
+            <span class="s">"Title of the plots' x-axis."</span><span class="o">,</span> <span class="s">"Processed instances"</span><span class="o">);</span>  
+
+    <span class="o">....</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>This library is used in the SAMOA and MOA projects for mining big data streams.</p>
+        </section>
+
+        <footer>
+          Javacliparser is maintained by <a href="https://github.com/abifet">abifet</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
